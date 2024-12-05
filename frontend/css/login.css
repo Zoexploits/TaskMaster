@@ -1,0 +1,77 @@
+/* General Styles */
+body {
+    font-family: 'Euclid Circular A', Arial, sans-serif; /* Custom font */
+    margin: 0;
+    padding: 0;
+    background-color: #17153B; /* Custom dark background */
+    color: #C8ACD6; /* Light text */
+}
+
+/* Login Container */
+.login-container {
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #2E236C; /* Custom dark container background */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #C8ACD6; /* Light accent color */
+    font-family: 'Euclid Circular A', Arial, sans-serif;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #433D8B; /* Custom label color */
+}
+
+/* Input Fields */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #433D8B; /* Custom border color */
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #17153B; /* Dark background for input fields */
+    color: #C8ACD6; /* Light text for input fields */
+}
+
+input::placeholder {
+    color: #C8ACD6; /* Placeholder text matching light text */
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #433D8B; /* Custom button color */
+    border: none;
+    border-radius: 4px;
+    color: #C8ACD6; /* Light button text */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #2E236C; /* Darker button color on hover */
+}
+
+/* Link Styling */
+a {
+    color: #C8ACD6; /* Custom link color */
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    display: block; /* Center align links */
+}
+
+a:hover {
+    text-decoration: underline;
+}

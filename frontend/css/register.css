@@ -1,0 +1,104 @@
+/* General Reset and Body Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Euclid Circular A", sans-serif;
+    background-color: #17153B; /* Dark mode background */
+    color: #C8ACD6; /* Light text */
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #2E236C; /* Slightly lighter background for container */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 28px;
+    color: #C8ACD6; /* Accent color for the title */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #C8ACD6; /* Accent color for labels */
+}
+
+input, textarea, select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #433D8B; /* Border matches palette */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #17153B; /* Dark input background */
+    color: #C8ACD6; /* Light text for inputs */
+}
+
+input[type="submit"] {
+    background-color: #433D8B; /* Button matches palette */
+    color: #C8ACD6; /* Light button text */
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #2E236C; /* Darker accent for hover */
+}
+
+/* Link Styling */
+a {
+    color: #C8ACD6; /* Accent color for links */
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #433D8B; /* Button matches palette */
+    border: none;
+    border-radius: 4px;
+    color: #C8ACD6; /* Light button text */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #2E236C; /* Darker accent for hover */
+}

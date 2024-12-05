@@ -1,0 +1,206 @@
+/* General Styles */
+body {
+    font-family: 'Euclid Circular A', Arial, sans-serif; /* Custom font */
+    margin: 0;
+    padding: 0;
+    background-color: #17153B; /* Custom dark background */
+    color: #C8ACD6; /* Light text */
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #433D8B; /* Custom header background */
+    color: #C8ACD6; /* Light text */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* Header Buttons */
+header .btn {
+    padding: 0.5rem 1rem;
+    background-color: #2E236C; /* Custom button background */
+    color: #C8ACD6; /* Button text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+header .btn:hover {
+    background-color: #17153B; /* Darker shade on hover */
+}
+
+/* Task Controls */
+.task-controls {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2E236C; /* Custom control background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filters label {
+    margin-right: 0.5rem;
+}
+
+.filters select,
+.filters input {
+    padding: 0.5rem;
+    border: 1px solid #433D8B; /* Border color */
+    background-color: #17153B; /* Input background */
+    color: #C8ACD6; /* Input text */
+    border-radius: 5px;
+}
+
+/* Buttons */
+.btn {
+    background-color: #433D8B; /* Custom button background */
+    color: #C8ACD6; /* Button text */
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 120px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2E236C; /* Darker shade on hover */
+}
+
+/* Priority Colors */
+.tasks-table .low-priority {
+    background-color: #433D8B; /* Custom low-priority color */
+    color: #C8ACD6;
+}
+
+.tasks-table .medium-priority {
+    background-color: #2E236C; /* Custom medium-priority color */
+    color: #C8ACD6;
+}
+
+.tasks-table .high-priority {
+    background-color: #17153B; /* Custom high-priority color */
+    color: #C8ACD6;
+}
+
+/* Task Table */
+.tasks-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2E236C; /* Table background */
+    color: #C8ACD6; /* Table text */
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tasks-table thead {
+    background-color: #433D8B; /* Header background */
+    color: #C8ACD6; /* Header text */
+}
+
+.tasks-table th,
+.tasks-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #433D8B; /* Custom border color */
+}
+
+.tasks-table tr:hover {
+    background-color: #2E236C; /* Row hover effect */
+}
+
+/* Task Actions */
+.task-actions button {
+    margin-right: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    color: #C8ACD6; /* Button text */
+    background-color: #433D8B; /* Default button background */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 80px;
+    transition: background-color 0.3s ease;
+}
+
+.task-actions button.delete {
+    background-color: #C8ACD6; /* Highlighted delete button */
+    color: #17153B; /* Contrasting text color */
+}
+
+.task-actions button.delete:hover {
+    background-color: #A64D79; /* Hover effect for delete */
+}
+
+.task-actions button:not(.delete) {
+    background-color: #2E236C; /* Default action button */
+}
+
+.task-actions button:not(.delete):hover {
+    background-color: #433D8B; /* Hover effect */
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #2E236C; /* Modal background */
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 50%;
+    color: #C8ACD6; /* Modal text color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #C8ACD6;
+}
+
+/* Modal Inputs */
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    padding: 0.5rem;
+    border: 1px solid #433D8B; /* Border color */
+    background-color: #17153B; /* Input background */
+    color: #C8ACD6; /* Input text */
+    border-radius: 5px;
+}
+
+/* Responsive Table */
+.tasks-table-wrapper {
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+.tasks-table th {
+    position: sticky;
+    top: 0;
+}

@@ -1,106 +1,55 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const User = require('../models/user');
+const bcrypt = require('bcryptjs');
+const User = require('../models/User');
 const router = express.Router();
+const rateLimit = require('express-rate-limit');
 
-// User Registration
+// Set up rate limiter
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // Limit each IP to 5 requests per windowMs
+    message: 'Too many login attempts, please try again later.',
+  });
+
+// Register User
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
 
-    // Debug: Log provided email and password
-    console.log('Provided email:', email);
-    console.log('Provided password:', password);
-
-    if (!username || !email || !password) {
-        return res.status(400).json({ message: 'Please fill in all fields.' });
-    }
-
     try {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: 'User already exists.' });
-        }
+        const user = new User({ username, email, password });
+        await user.save();
+ 
+        // Create a token for the new user
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newUser = new User({
-            username,   // Include the username
-            email,      // Include the email
-            password: hashedPassword,  // Include the hashed password
-        });
-
-        const savedUser = await newUser.save();
-
-        res.status(201).json({
-            message: 'User registered successfully',
-            user: {
-                id: savedUser._id,
-                username: savedUser.username,
-                email: savedUser.email,
-            },
-        });
-    } catch (error) {
-        res.status(500).json({ message: 'Server error', error: error.message });
+        // Send the token in the response
+        res.status(201).json({ token }); // Now returning token
+        //res.status(201).json({ message: 'User registered successfully!' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).json({ error: 'Registration failed!' });
     }
 });
 
-
-// User Login
-router.post('/login', async (req, res) => {
+// Login User
+router.post('/login', loginLimiter, async (req, res) => {
     const { email, password } = req.body;
 
-    // Debug: Log provided email and password
-    console.log('Provided email:', email);
-    console.log('Provided password:', password);
-
-    // Check if all fields are provided
-    if (!email || !password) {
-        return res.status(400).json({ message: 'Please provide email and password.' });
-    }
-
     try {
-        // Find the user by email
         const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ message: 'Invalid credentials' });
-        }
+        if (!user) return res.status(401).json({ error: 'Invalid credentials!' });
 
-        // Debug: Log retrieved hashed password
-        console.log('Hashed password in DB:', user.password);
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return res.status(401).json({ error: 'Invalid credentials!' });
 
-        // Compare the provided password with the hashed password
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        // Debug: Log the result of bcrypt comparison
-        console.log('Password match result:', isPasswordValid);
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        if (!isPasswordValid) {
-            return res.status(400).json({ message: 'Invalid credentials' });
-        }
-        console.log('Provided password:', password);
-
-
-        // Generate JWT (optional but recommended)
-        const token = jwt.sign(
-            { id: user._id },
-            process.env.JWT_SECRET || 'your_secret_key',
-            { expiresIn: '1h' }
-        );
-
-        // Send success response
-        res.status(200).json({
-            message: 'Login successful',
-            token,
-            user: {
-                id: user._id,
-                email: user.email,
-                username: user.username,
-            },
-        });
-    } catch (error) {
-        res.status(500).json({ message: 'Server error', error: error.message });
+        res.status(200).json({ token });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ error: 'Server error!' });
     }
 });
-
 
 module.exports = router;

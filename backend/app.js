@@ -1,22 +1,30 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const connectDB = require('./db');
 const authRoutes = require('./routes/auth');
-
-dotenv.config();
+const taskRoutes = require('./routes/tasks');
+const helmet = require('helmet');
+require('dotenv').config();
 
 const app = express();
-app.use(express.json());
+
+// Use Helmet to set secure HTTP headers
+app.use(helmet());
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
 
 // Routes
-app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
+app.use('/tasks', taskRoutes);
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err));
-
-// Server
-app.listen(process.env.PORT || 5000, () => {
-    console.log('Server running on port 5000');
+app.get('/', (req, res) => {
+    res.send('Welcome to TaskMaster Backend!');
 });
+
+// Database connection
+connectDB();
+
+module.exports = app; // Export the app for use in other files
